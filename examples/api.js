@@ -10,7 +10,7 @@ const options = { limit: 5, sort: '-createdAt' };
 
 // callback-based
 bot.contacts.list(options,
-    (err, contacts) => console.log(`${contacts.length} contacts returned`));
+    (err, contacts) => console.log(`${contacts ? contacts.length : 0} contacts returned`));
 
 // promise-based
 bot.contacts.list(options)

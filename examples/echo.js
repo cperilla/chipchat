@@ -1,9 +1,21 @@
 'use strict';
 
+const logger = {
+    warn: console.log,
+    error: console.log,
+    info: console.log,
+    critical: console.log
+};
+
 const Bot = require('../lib/chipchat');
+const chatbase = require('../lib/middleware/chatbase')(logger);
 
 const bot = new Bot({
-    token: process.env.TOKEN
+    token: process.env.TOKEN,
+    middleware: {
+        send: [chatbase.send],
+        receive: [chatbase.receive]
+    }
 });
 
 bot.on('message.create.*.chat', (payload, actions) => {
